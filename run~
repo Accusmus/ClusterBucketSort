@@ -1,0 +1,2 @@
+mpic++ -o -03 assignment2.c assignment2
+qsub assignment2.pbs

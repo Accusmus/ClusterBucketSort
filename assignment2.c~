@@ -1,0 +1,53 @@
+//first.cpp Adding numbers using two nodes C++ version
+#include <stdio.h>
+#include <stdlib.h>
+#include <cmath>
+#include <climits>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+#include "mpi.h"
+
+typedef unsigned long ULONG;
+
+using namespace std;
+
+int main(int argc,char* argv[])
+{
+  MPI_Status Stat;
+
+  MPI::Init(argc, argv);
+
+  int nitems;
+  const float xmin = 10.0; 
+  const float xmax = 250000;
+  int nbuckets = 1000;
+
+  int myid = MPI::COMM_WORLD.Get_rank();
+  int numproc = MPI::COMM_WORLD.Get_size(); 
+
+  if(argc == 2){ 
+    nitems = atoi(argv[1]);
+  }else{
+    cout << "Please Provide the number of items as arguement" << endl;
+    exit(1);
+  }
+
+  // master process
+  if(myid == 0){
+    cout << "master" << endl;
+    float *data = (float*)malloc(nitems*sizeof(float));
+    for(int i = 0; i < nitems; i++){
+      data[i] = drand48()*(xmax-xmin-1)+xmin;
+      cout << data[i] << " ";
+    }
+    cout << endl;
+
+  // slave process
+  }else if(myid > 0){
+    cout << "slave" << endl;
+  }
+
+  MPI::Finalize();
+}

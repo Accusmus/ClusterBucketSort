@@ -1,0 +1,12 @@
+Read from /var/spool/torque/aux//20769.mighty.local
+This job runs on these processors:
+compute-0-4
+--------------------------------------------------------------------------
+mpiexec was unable to launch the specified application as it could not access
+or execute an executable:
+
+Executable: /home/s14303742/mpi_examples/Assignment2/bucket.c
+Node: compute-0-4.local
+
+while attempting to start process rank 0.
+--------------------------------------------------------------------------
